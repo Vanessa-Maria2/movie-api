@@ -21,6 +21,11 @@ public class IntegrationTMDBConfig {
     private static String token;
 
     @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
     public CommandLineRunner integration() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -41,7 +46,9 @@ public class IntegrationTMDBConfig {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(json);
                 token = jsonNode.get("request_token").asText();
+                System.out.println("token "+token);
             }
+
         };
     }
 
