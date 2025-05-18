@@ -46,7 +46,6 @@ public class IntegrationTMDBConfig {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(json);
                 token = jsonNode.get("request_token").asText();
-                System.out.println("token "+token);
             }
 
         };
