@@ -84,7 +84,7 @@ public class MovieService {
     }
 
     public boolean existsMovieById(Long id) {
-        return movieRepository.existsById(id);
+        return movieRepository.existsById_movie(id);
     }
 
     public List<MovieResponseDto> getAllMovies() {
