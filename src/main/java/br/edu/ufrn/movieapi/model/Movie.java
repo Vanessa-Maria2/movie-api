@@ -42,7 +42,7 @@ public class Movie {
 
     private Boolean adult;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Genre> genre_ids;
 
     public Boolean getAdult() {
