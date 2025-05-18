@@ -70,6 +70,11 @@ public class MovieService {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(response.getBody());
         JsonNode resultsNode = rootNode.path("results");
+
+        if(resultsNode.isEmpty()) {
+            throw new EntityNotFoundException("Movie not found");
+        }
+
         JsonNode firstMovie = resultsNode.get(0);
 
         MovieResponseApiDto movieResponseApiDto = objectMapper.treeToValue(firstMovie, MovieResponseApiDto.class);
@@ -98,7 +103,7 @@ public class MovieService {
     }
 
     public boolean deleteMovieById(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot delete movie. Movie with the given ID does not exist!"));
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cannot delete movie. Movie with the given ID does not exist!"));
         movieRepository.delete(movie);
         return true;
     }
