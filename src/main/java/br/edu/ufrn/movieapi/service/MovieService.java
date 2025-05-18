@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -83,4 +84,15 @@ public class MovieService {
     public boolean existsMovieById(Long id) {
         return movieRepository.existsById(id);
     }
+
+    public List<MovieResponseDto> getAllMovies() {
+        List<Movie> movies = movieRepository.findAll();
+        return movies.stream().map(movieMapper::toMovieResponseDto).toList();
+    }
+
+    public Optional<MovieResponseDto> getMovieById(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
+        return Optional.ofNullable(movieMapper.toMovieResponseDto(movie));
+    }
+
 }
