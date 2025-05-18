@@ -35,4 +35,10 @@ public class MovieController {
         MovieResponseDto movie = movieService.saveMovie(title);
         return ResponseEntity.ok(movie);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<MovieResponseDto> deleteMovie(@PathVariable Long id) {
+        boolean result = movieService.deleteMovieById(id);
+        return result ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }

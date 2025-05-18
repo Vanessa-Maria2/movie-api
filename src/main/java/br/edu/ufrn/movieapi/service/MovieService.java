@@ -97,4 +97,10 @@ public class MovieService {
         return Optional.ofNullable(movieMapper.toMovieResponseDto(movie));
     }
 
+    public boolean deleteMovieById(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot delete movie. Movie with the given ID does not exist!"));
+        movieRepository.delete(movie);
+        return true;
+    }
+
 }
