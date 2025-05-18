@@ -9,6 +9,8 @@ import br.edu.ufrn.movieapi.repository.MovieRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -43,10 +45,10 @@ public class MovieService {
         this.genreService = genreService;
     }
 
-    public MovieResponseDto saveMovie(String title) throws Exception {
+    public MovieResponseDto saveMovie(String title) throws ParseException, JsonProcessingException {
         Movie movie = searchMovieByTitle(title);
         if (existsMovieById(movie.getId())) {
-            throw new Exception("Movie already exists");
+            throw new EntityExistsException("Movie already exists");
         }
         movieRepository.save(movie);
         return movieMapper.toMovieResponseDto(movie);
@@ -91,7 +93,7 @@ public class MovieService {
     }
 
     public Optional<MovieResponseDto> getMovieById(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Movie not found"));
         return Optional.ofNullable(movieMapper.toMovieResponseDto(movie));
     }
 
