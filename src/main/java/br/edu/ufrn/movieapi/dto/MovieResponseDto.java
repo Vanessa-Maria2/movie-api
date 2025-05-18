@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MovieResponseDto {
+    private long id_movie;
     private long id;
     private String original_title;
     private String title;
@@ -21,6 +22,14 @@ public class MovieResponseDto {
     private Boolean adult;
 
     private List<Genre> genre_ids;
+
+    public long getId_movie() {
+        return id_movie;
+    }
+
+    public void setId_movie(long id_movie) {
+        this.id_movie = id_movie;
+    }
 
     public int getVote_count() {
         return vote_count;
