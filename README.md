@@ -54,6 +54,18 @@ https://movie-api-65ca.onrender.com/swagger-ui/index.html#/
     ```
 4. Abra o navegador e acesse [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html) para visualizar o Swagger da aplicação.
 
+# Como executar os testes
+⚠️ **Atenção:** Necessário arquivo de variáveis de ambiente .env
+
+1. Clone o **repositório do projeto**, caso ainda não tenha feito.
+2. Navegue até o seguinte diretório dentro da estrutura do projeto:
+    ```
+    test/java/br/edu/ufrn/movieapi/service
+    ```
+3. Abra a classe MovieServiceTest.java na sua IDE.
+4. Execute os testes utilizando a funcionalidade Run da IDE.
+
+Obs: Os testes utilizam um banco de dados H2 em memória.
 
 # Tecnologias
 
